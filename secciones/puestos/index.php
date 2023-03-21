@@ -1,6 +1,6 @@
 <?php include("../../templates/header.php"); ?>
 <br />
-
+<h4>Puestos</h4>
 <div class="card">
     <div class="card-header">
         <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar Registro</a>

@@ -14,7 +14,7 @@ if (isset($_GET['txtID'])) {
 //recepcion de los datos por el envio del formulario
 if ($_POST) {
     $txtID = (isset($_POST['txtID']) ? $_POST['txtID'] : "");
-    $nombredelpuesto = (isset($_POST["nombredelpuesto"]) ? $_POST["nombredelpuesto"] : '');
+    $nombredelpuesto = (isset($_POST["nombredelpuesto"]) ? $_POST["nombredelpuesto"] : "");
     $sentencia = $conexion->prepare("UPDATE tbl_puestos SET nombredelpuesto=:nombredelpuesto 
     WHERE id=:id");
 

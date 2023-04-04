@@ -1,10 +1,16 @@
-<?php include("../../templates/header.php");?>
+<?php
+include("../../bd.php");
+$sentencia = $conexion->prepare("SELECT *FROM  tbl_usuarios");
+$sentencia->execute();
+$lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<?php include("../../templates/header.php"); ?>
 <br />
 <h4>Usuarios</h4>
 <div class="card">
     <div class="card-header">
-        <a name="" id="" class="btn btn-primary" 
-        href="crear.php" role="button">Agregar Usuarios</a>
+        <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar Usuarios</a>
     </div>
     <div class="card-body">
         <div class="table-responsive-sm">
@@ -19,21 +25,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">1</td>
-                        <td>Gustavo</td>
-                        <td>******</td>
-                        <td>gustavoromeroj521@gmail.com</td>
-                        <td>
-                           <input name="btneditar" id="btneditar" class="btn btn-info" type="button" value="Editar">
-                           <input name="btneliminar" id="btneliminar" class="btn btn-danger" type="button" value="Eliminar">
-                        </td>
-                    </tr>
+                    <?php
+                    foreach ($lista_tbl_usuarios as $registro) {
+                    ?>
+                        <tr class="">
+                            <td scope="row"><?php echo $registro['id'] ?></td>
+                            <td><?php echo $registro['usuario'] ?></td>
+                            <td>******</td>
+                            <td><?php echo $registro['correo'] ?></td>
+                            <td>
+                                <a class="btn btn-info" href="editar.php?txtID=<?php echo $registro['id']; ?>" role="button">Actualizar</a>
+                                <a class="btn btn-danger" href="index.php?txtID=<?php echo $registro['id']; ?>" role="button">Eliminar</a>
+
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
-        
+
     </div>
-    
+
 </div>
-<?php include("../../templates/footer.php");?>
+<?php include("../../templates/footer.php"); ?>

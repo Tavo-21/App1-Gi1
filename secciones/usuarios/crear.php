@@ -10,7 +10,7 @@ if ($_POST) {
 
     //insertar registros
     $sentencia=$conexion->prepare("INSERT INTO tbl_usuarios (id,usuario,password,correo) 
-    VALUES (null,:usuario,:password,:correo)");
+    VALUES (NULL,:usuario,:password,:correo)");
 
     //datos que se van a llenar dentro de la sentencia sql
     $sentencia->bindParam(":usuario",$usuario);
@@ -20,7 +20,6 @@ if ($_POST) {
     $sentencia->execute();
     header("location:index.php");
 }
-
 ?>
 
 <?php include("../../templates/header.php"); ?>
@@ -36,8 +35,8 @@ if ($_POST) {
                 <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="helpId" placeholder="Nombre usuario">
             </div>
             <div class="mb-3">
-                <label for="contraseña" class="form-label">Password</label>
-                <input type="password" class="form-control" name="contraseña" id="contraseña" aria-describedby="helpId" placeholder="Contraseña">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password" aria-describedby="helpId" placeholder="Contraseña">
             </div>
             <div class="mb-3">
                 <label for="correo" class="form-label">Correo</label>

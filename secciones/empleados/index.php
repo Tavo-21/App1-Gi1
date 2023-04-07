@@ -1,3 +1,17 @@
+<?php
+include("../../bd.php");
+$sentencia = $conexion->prepare("SELECT *,
+
+#hacer una subconsulta para sacar el valor de puesto
+(SELECT nombredelpuesto 
+FROM tbl_puestos 
+WHERE tbl_puestos.id=tbl_empleados.idpuesto limit 1) as puesto 
+
+FROM tbl_empleados");
+$sentencia->execute();
+$lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <?php include("../../templates/header.php"); ?>
 <br />
 <h4>Empleados</h4>
@@ -10,6 +24,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Cv</th>
@@ -19,16 +34,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="">
-                        <td scope="row">Gustavo </td>
-                        <td>imagen.jpg</td>
-                        <td>CV.pdf</td>
-                        <td>Programador Sr</td>
-                        <td>12/12/2019</td>
-                        <td><a name="" id="" class="btn btn-primary"  href="#" role="button">Carta</a>
-                        <a name="" id="" class="btn btn-info" href="#" role="button">Editar</a>
-                        <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a></td>
-                    </tr>
+                    <?php
+                    foreach ($lista_tbl_empleados as $registro) {
+                    ?>
+                        <tr class="">
+                            <td><?php echo $registro['id']; ?></td>
+                            <td scope="row">
+                                <?php echo $registro['primernombre']; ?>
+                                <?php echo $registro['segundonombre']; ?>
+                                <?php echo $registro['primerapellido']; ?>
+                                <?php echo $registro['segundoapellido'] ?></td>
+                            <td><?php echo $registro['foto']; ?></td>
+                            <td><?php echo $registro['cv'] ?></td>
+                            <!--Se hizo una subconsulta para sacar el nombre del puesto--> 
+                            <td><?php echo $registro['puesto'] ?></td>
+                            <td><?php echo $registro['fechadeingreso'] ?></td>
+                            <td><a name="" id="" class="btn btn-primary" href="#" role="button">Carta</a>
+                                <a name="" id="" class="btn btn-info" href="#" role="button">Editar</a>
+                                <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
 
                 </tbody>
             </table>

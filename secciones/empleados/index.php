@@ -44,7 +44,10 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                 <?php echo $registro['segundonombre']; ?>
                                 <?php echo $registro['primerapellido']; ?>
                                 <?php echo $registro['segundoapellido'] ?></td>
-                            <td><?php echo $registro['foto']; ?></td>
+                            <td>
+                            <img width="90" 
+                            src="<?php echo $registro['foto'];?>" class="img-fluid rounded" alt="">
+                            </td>
                             <td><?php echo $registro['cv'] ?></td>
                             <!--Se hizo una subconsulta para sacar el nombre del puesto--> 
                             <td><?php echo $registro['puesto'] ?></td>
